@@ -1,0 +1,312 @@
+.clearfix {
+	overflow: hidden;
+}
+.transform(@transX:0;@transY:0;@roY:0deg){
+	transform: translate(@transX,@transY) rotateY(@roY);
+	-ms-transform: translate(@transX,@transY) rotateY(@roY);
+	-moz-transform: translate(@transX,@transY) rotateY(@roY);
+	-webkit-transform: translate(@transX,@transY) rotateY(@roY);
+	-o-transform: translate(@transX,@transY) rotateY(@roY);
+}
+.rotate(@ro:0deg;@scale:0){
+	transform: rotate(@ro) scale(@scale);
+	-ms-transform: rotate(@ro) scale(@scale);
+	-moz-transform: rotate(@ro) scale(@scale);
+	-webkit-transform: rotate(@ro) scale(@scale);
+	-o-transform: rotate(@ro) scale(@scale);
+}
+/*head start-----------------------------*/
+#header {
+	width: 100%;
+	> .main-header {
+		width: 1100px;
+		height: 80px;
+		margin: 0 auto;
+		position: relative;
+		background-color: #fff;
+		> .main-header-logo {
+			float: left;
+			margin-top: 30px;
+		}
+		> nav {
+			float: right;
+			margin-top: 50px;
+			> ul {
+				.clearfix
+			}
+			li {
+				float: left;
+				margin-left: 40px;
+				position: relative;
+				&:hover .upper {
+					width: 100%;
+				}
+				.upper {
+					position: absolute;
+					color: #000;
+					width: 0;
+					transition: all 0.5s;
+					overflow: hidden;
+				}
+			}
+		}
+		> .indicator {
+			position: absolute;
+			bottom: -11px;
+			left: 50%;
+			transform: translateX(-50%);
+			transition: all 0.7s;
+			z-index: 10;
+		}
+	}
+}
+/*head end---------------------------------*/
+.content {
+	width: 100%;
+	position: relative;
+	overflow: hidden;
+	> ul {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		transition: top 0.8s;
+		> li {
+			position: relative;
+			background-position: center !important;
+			&:nth-of-type(1) {
+				background: url(../images/bg1.jpg) no-repeat;
+			}
+			&:nth-of-type(2) {
+				background: url(../images/bg2.jpg) no-repeat;
+			}
+			&:nth-of-type(3) {
+				background: url(../images/bg3.jpg) no-repeat;
+			}
+			&:nth-of-type(4) {
+				background: url(../images/bg4.jpg) no-repeat;
+			}
+			&:nth-of-type(5) {
+				background: url(../images/bg5.jpg) no-repeat;
+			}
+			> section {
+				width: 1100px;
+				height: 520px;
+				position: absolute;
+				top: 0;
+				left: 0;
+				bottom: 0;
+				right: 0;
+				margin: auto;
+			}	
+			> .course {
+				> .course-title {
+					margin: 50px;
+					> span {
+						color:#009ee0; 
+						font-size:80px; 
+						line-height:0.8; 
+						font-weight:bold;
+						letter-spacing:-5px;
+					}
+				}
+				> .course-text {
+					width: 400px;
+					margin-left: 50px;
+					> p {
+						color:white;
+						line-height:1.5;
+						font-size:15px;
+					}
+				}
+				> .course-list {
+					width: 480px;
+					position: absolute;
+					top: 50px;
+					right: 70px;
+					> span {
+						width: 9px;
+						height: 410px;
+						position: absolute;
+						top: -7px;
+						background: url(../images/plus_row.png);
+					}
+					> span:nth-of-type(1){
+						left: -5px;
+					}
+					> span:nth-of-type(2){
+						left: 115px;
+					}
+					> span:nth-of-type(3){
+						left: 235px;
+					}
+					> span:nth-of-type(4){
+						left: 355px;
+					}
+					> span:nth-of-type(5){
+						left: 475px;
+					}
+					li {
+						width: 120px;
+						height: 132px;
+						float: left;
+						position: relative;
+						transform-style: preserve-3d;
+						perspective: 500px;
+						&:hover .front {
+							.transform(@roY:360deg);
+						}
+						&:hover .back {
+							.transform(@roY:180deg);
+						}
+						&:nth-of-type(1) .back {
+							background: url(../images/bks.png) center no-repeat;
+						}
+						&:nth-of-type(2) .back {
+							background: url(../images/gu.png) center no-repeat;
+						}
+						&:nth-of-type(3) .back {
+							background: url(../images/hlx.png) center no-repeat;
+						}
+						&:nth-of-type(4) .back {
+							background: url(../images/pcwelt.png) center no-repeat;
+						}
+						&:nth-of-type(5) .back {
+							background: url(../images/lbs.png) center no-repeat;
+						}
+						&:nth-of-type(6) .back {
+							background: url(../images/leonberg.png) center no-repeat;
+						}
+						&:nth-of-type(7) .back {
+							background: url(../images/tata.png) center no-repeat;
+						}
+						&:nth-of-type(8) .back {
+							background: url(../images/apcoa.png) center no-repeat;
+						}
+						&:nth-of-type(9) .back {
+							background: url(../images/lbs.png) center no-repeat;
+						}
+						&:nth-of-type(10) .back {
+							background: url(../images/leonberg.png) center no-repeat;
+						}
+						&:nth-of-type(11) .back {
+							background: url(../images/tata.png) center no-repeat;
+						}
+						&:nth-of-type(12) .back {
+							background: url(../images/apcoa.png) center no-repeat;
+						}
+						> div {
+							width: 100%;
+							height: 100%;
+							position: absolute;
+							top: 0;
+							left: 0;
+							box-sizing: border-box;
+							padding: 15px;
+							text-align: center;
+							&.front {
+								.transform(@roY:180deg);
+								background-color: #009ee0;
+								backface-visibility: hidden;
+								transition: transform 1s;
+
+							}
+							&.back {
+								transition: transform 1s;
+							}
+						}
+					}
+				}
+			}		
+			> .works {
+				> header {
+					margin: 50px 0 100px 50px;
+					> span {
+						color:#009ee0; 
+						font-size:80px; 
+						line-height:0.8; 
+						font-weight:bold;
+						letter-spacing:-5px;
+					}
+				}
+				> .works-robot {
+					width: 167px;
+					height: 191px;
+					position: absolute;
+					top: 170px;
+					left: 900px;
+					background: url(../images/robot.png) no-repeat;
+					animation: robot 4s linear infinite;
+				}
+				> .works-list {
+					margin-left: 50px;
+					li {
+						float: left;
+						margin: 0 1px;
+						width: 220px;
+						height: 133px;
+						position: relative;
+						overflow: hidden;
+						&:hover .mask {
+							opacity: 0.8;
+						}
+						&:hover img {
+							.rotate(@ro:30deg;@scale:1.5);
+						}
+						> img {
+							transition: transform 1s;
+						}
+						> .mask {
+							position: absolute;
+							top: 0;
+							left: 0;
+							bottom: 0;
+							right: 0;
+							box-sizing: border-box;
+							padding: 10px;
+							background-color: rgb(25,25,25);
+							color: #fff;
+							opacity: 0;
+							transition: opacity 0.8s;
+							> .icon {
+								position: absolute;
+								width: 32px;
+								height: 34px;
+								top: 0;
+								left: 0;
+								bottom: 0;
+								right: 0;
+								margin: auto;
+								cursor: pointer;
+								background: url(../images/zoomico.png) no-repeat;
+								transition: background-position 0.7s;
+								&:hover {
+									background-position: 0 -34px;
+								}
+							}
+						}
+						&:nth-of-type(4) {
+							width: 332px;
+							height: 133px;
+						}
+					}
+				}
+			}	
+		}
+	}
+}
+
+@keyframes robot {
+	0% {
+		.transform();
+	}
+	49% {
+		.transform(@transX:-495px);
+	}
+	50% {
+		.transform(@transX:-495px;@roY:180deg);
+	}
+	100% {
+		.transform(@roY:180deg);
+	}
+} 
