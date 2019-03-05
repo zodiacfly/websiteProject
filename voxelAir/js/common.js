@@ -25,27 +25,32 @@ function setMainEvent(){
 	indicator.style.left = navList[0].offsetLeft + navList[0].offsetWidth/2 +'px';
 	upper[0].style.width = '100%';
 	var lastPosition =  navList[0].offsetLeft + navList[0].offsetWidth/2;
-
-	function addClickHandle(){
-		for (var i = 0; i < upper.length; i++) {
-			upper[i].style.width = '';
-		}
-		num = this.index;
-		upper[this.index].style.width = '100%';
-		indicator.style.left = navList[this.index].offsetLeft + navList[this.index].offsetWidth/2 + 'px';
-		lastPosition = navList[this.index].offsetLeft + navList[this.index].offsetWidth/2;
-		contentUl.style.top = -this.index*(document.documentElement.clientHeight - header.offsetHeight) + 'px';
-	}
-
-	function addMouseoverHandle(){
-		indicator.style.left = navList[this.index].offsetLeft + navList[this.index].offsetWidth/2 + 'px';
-	}
-
-	function addMouseoutHandle(){
-		indicator.style.left = lastPosition + 'px';
-	}
+	var home = document.querySelector('.home');
+	var homeSliderUL =document.querySelector('.home-slider');
+	var homeSlideList= homeSliderUL.querySelectorAll('li');
+	var homeButtonUL= document.querySelector('.home-button');
+	var homeButtonList = homeButtonUL.querySelectorAll('li');
+	
 	//set header nav event------------------------------------------------------------
 	function setHeaderNavEvent(){
+		function addClickHandle(){
+			for (var i = 0; i < upper.length; i++) {
+				upper[i].style.width = '';
+			}
+			num = this.index;
+			upper[this.index].style.width = '100%';
+			indicator.style.left = navList[this.index].offsetLeft + navList[this.index].offsetWidth/2 + 'px';
+			lastPosition = navList[this.index].offsetLeft + navList[this.index].offsetWidth/2;
+			contentUl.style.top = -this.index*(document.documentElement.clientHeight - header.offsetHeight) + 'px';
+		}
+
+		function addMouseoverHandle(){
+			indicator.style.left = navList[this.index].offsetLeft + navList[this.index].offsetWidth/2 + 'px';
+		}
+
+		function addMouseoutHandle(){
+			indicator.style.left = lastPosition + 'px';
+		}
 		for (var i = 0; i < navList.length; i++) {
 
 			navList[i].index = i;
@@ -55,20 +60,21 @@ function setMainEvent(){
 		}
 	}
 	setHeaderNavEvent();	
+
 	//set height for content part-------------------------------------------------------
 	function setContentHeight(){
 		for (var i = 0; i < contentList.length; i++) {
 			contentList[i].style.height = document.documentElement.clientHeight - header.offsetHeight + 'px';
 		}
 		window.onresize = function(){
-		content.style.height = document.documentElement.clientHeight - header.offsetHeight + 'px';
-		contentUl.style.top = -num*(document.documentElement.clientHeight - header.offsetHeight) + 'px';
-		indicator.style.left = navList[num].offsetLeft + navList[num].offsetWidth/2 + 'px';
-		lastPosition = navList[num].offsetLeft + navList[num].offsetWidth/2;
-		for (var i = 0; i < contentList.length; i++) {
-			contentList[i].style.height = document.documentElement.clientHeight - header.offsetHeight + 'px';
+			content.style.height = document.documentElement.clientHeight - header.offsetHeight + 'px';
+			contentUl.style.top = -num*(document.documentElement.clientHeight - header.offsetHeight) + 'px';
+			indicator.style.left = navList[num].offsetLeft + navList[num].offsetWidth/2 + 'px';
+			lastPosition = navList[num].offsetLeft + navList[num].offsetWidth/2;
+			for (var i = 0; i < contentList.length; i++) {
+				contentList[i].style.height = document.documentElement.clientHeight - header.offsetHeight + 'px';
+			}
 		}
-	}
 	}
 	setContentHeight();
 	
@@ -125,8 +131,97 @@ function setMainEvent(){
 			timeId = setTimeout(function(){
 				myWheel(e);
 			},150)	
-		};
-		
+		};		
 	}
 	setWheelScrollEvent();
+	//set slider event for home section--------------------------------------------
+	function setHomeSliderEvent(){
+		var oldIndex = 0;
+		var autoIndex = 0;
+		var sliderTimeId;
+		var buttonTimeId;
+		var flag = true;
+		for (var i = 0; i < homeButtonList.length; i++) {
+			homeButtonList[i].index = i;
+			homeButtonList[i].onclick = function(){
+				var that = this;
+				addHomeButtonClickHandle(that);
+				clearTimeout(buttonTimeId);
+				buttonTimeId = setTimeout(function(){
+					flag = true;
+				},1500)
+			}	
+		}
+		
+		function addHomeButtonClickHandle(that){
+			if(flag){
+				for (var j = 0; j < homeButtonList.length; j++) {
+					homeButtonList[j].classList.remove('slider-button-current');
+				}
+				that.classList.add('slider-button-current');
+
+				if(oldIndex < that.index){
+					homeSlideList[that.index].classList.add('slider-right-display');
+					homeSlideList[that.index].classList.remove('slider-left-display');
+					homeSlideList[that.index].classList.remove('slider-right-hide');
+					homeSlideList[that.index].classList.remove('slider-left-hide');
+
+					homeSlideList[oldIndex].classList.add('slider-left-hide');
+					homeSlideList[oldIndex].classList.remove('slider-left-display');
+					homeSlideList[oldIndex].classList.remove('slider-right-hide');
+					homeSlideList[oldIndex].classList.remove('slider-right-display');
+				}
+				if(oldIndex > that.index){
+					homeSlideList[that.index].classList.add('slider-left-display');
+					homeSlideList[that.index].classList.remove('slider-right-hide');
+					homeSlideList[that.index].classList.remove('slider-left-hide');
+					homeSlideList[that.index].classList.remove('slider-right-display');
+
+					homeSlideList[oldIndex].classList.add('slider-right-hide');
+					homeSlideList[oldIndex].classList.remove('slider-left-hide');
+					homeSlideList[oldIndex].classList.remove('slider-left-display');
+					homeSlideList[oldIndex].classList.remove('slider-right-display');
+				}
+				oldIndex = that.index;
+				autoIndex = that.index;
+				flag = false;
+			}
+		}
+		function autoPlay(){
+			autoIndex++;
+			if(autoIndex == homeSlideList.length){
+				autoIndex = 0;
+			}
+			for (var i = 0; i < homeButtonList.length; i++) {
+				homeButtonList[i].classList.remove('slider-button-current');
+			}
+			homeButtonList[autoIndex].classList.add('slider-button-current');
+
+			homeSlideList[autoIndex].classList.add('slider-right-display');
+			homeSlideList[autoIndex].classList.remove('slider-left-display');
+			homeSlideList[autoIndex].classList.remove('slider-right-hide');
+			homeSlideList[autoIndex].classList.remove('slider-left-hide');
+
+			homeSlideList[oldIndex].classList.add('slider-left-hide');
+			homeSlideList[oldIndex].classList.remove('slider-left-display');
+			homeSlideList[oldIndex].classList.remove('slider-right-hide');
+			homeSlideList[oldIndex].classList.remove('slider-right-display');
+
+			oldIndex = autoIndex;
+		}
+		function sliderAutoPlayEvent(){
+			clearInterval(sliderTimeId);
+			sliderTimeId = setInterval(autoPlay,2000);
+		}
+
+		sliderAutoPlayEvent();
+
+		home.onmouseover = function(){
+			clearInterval(sliderTimeId);
+		}
+
+		home.onmouseout = sliderAutoPlayEvent;
+	}
+	setHomeSliderEvent();
+	
 }
