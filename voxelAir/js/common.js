@@ -25,12 +25,17 @@ function setMainEvent(){
 	indicator.style.left = navList[0].offsetLeft + navList[0].offsetWidth/2 +'px';
 	upper[0].style.width = '100%';
 	var lastPosition =  navList[0].offsetLeft + navList[0].offsetWidth/2;
+
 	var home = document.querySelector('.home');
 	var homeSliderUL =document.querySelector('.home-slider');
 	var homeSlideList= homeSliderUL.querySelectorAll('li');
 	var homeButtonUL= document.querySelector('.home-button');
 	var homeButtonList = homeButtonUL.querySelectorAll('li');
-	
+
+	var about = document.querySelector('.about');
+	var aboutUL = about.querySelectorAll('ul');
+	var picFrame = about.querySelector('.pic-one');
+
 	//set header nav event------------------------------------------------------------
 	function setHeaderNavEvent(){
 		function addClickHandle(){
@@ -223,5 +228,48 @@ function setMainEvent(){
 		home.onmouseout = sliderAutoPlayEvent;
 	}
 	setHomeSliderEvent();
+	//set pic amination for about section-------------------------------------------
+	function setAboutPicEvent(){
+
+		var listWidth = picFrame.clientWidth/2;
+		var listHeight = picFrame.clientHeight/2;
+
+		for (var i = 0; i < aboutUL.length; i++) {
+
+			var src = aboutUL[i].dataset['picSrc'];
+
+			for (var j = 0; j < 4; j++) {
+				var liObj = document.createElement('li');
+				var imgObj = document.createElement('img');
+				liObj.style.width = listWidth + 'px';
+				liObj.style.height = listHeight + 'px';
+				imgObj.style.left= -(j%2)*listWidth+"px";
+				imgObj.style.top=  -Math.floor(j/2)*listHeight+"px";
+				imgObj.src = src;
+				liObj.appendChild(imgObj);
+				aboutUL[i].appendChild(liObj);
+			}
+
+			aboutUL[i].onmouseover = addMouseoverHandle;
+			aboutUL[i].onmouseout = addMouseoutHandle;
+
+		}
+
+		function addMouseoverHandle(){
+			var imgList = this.querySelectorAll('img');
+			imgList[0].style.top = listHeight + 'px';
+			imgList[1].style.left = -listWidth*2 + 'px';
+			imgList[2].style.left = listWidth + 'px';
+			imgList[3].style.top = -listHeight*2 + 'px';
+		}
+		function addMouseoutHandle(){
+			var imgList = this.querySelectorAll('img');
+			imgList[0].style.top = 0 + 'px';
+			imgList[1].style.left = -listWidth + 'px';
+			imgList[2].style.left = 0 + 'px';
+			imgList[3].style.top = -listHeight + 'px';
+		}
+	}
+	setAboutPicEvent();
 	
 }
