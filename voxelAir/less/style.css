@@ -52,6 +52,23 @@
   position: relative;
   overflow: hidden;
 }
+.content > .side-nav-dot {
+  position: fixed;
+  right: 10px;
+  top: 50%;
+}
+.content > .side-nav-dot li {
+  width: 9px;
+  height: 9px;
+  border: 3px solid #e9f1f6;
+  border-radius: 50%;
+  margin-top: 6px;
+  cursor: pointer;
+}
+.content > .side-nav-dot li.side-nav-current {
+  background-color: #f0f0f4;
+  cursor: default;
+}
 .content > ul {
   position: absolute;
   top: 0;
@@ -467,6 +484,79 @@
   -moz-transform: translate(0, 0) translateZ(0) rotateY(0deg) scale(1);
   -webkit-transform: translate(0, 0) translateZ(0) rotateY(0deg) scale(1);
   -o-transform: translate(0, 0) translateZ(0) rotateY(0deg) scale(1);
+}
+.content > ul > li > .team > .team-title {
+  margin: 50px;
+  width: 400px;
+  float: left;
+}
+.content > ul > li > .team > .team-title > span {
+  color: #009ee0;
+  font-size: 80px;
+  line-height: 0.8;
+  font-weight: bold;
+  letter-spacing: -5px;
+}
+.content > ul > li > .team > .team-text {
+  margin: 50px;
+  width: 400px;
+  float: right;
+}
+.content > ul > li > .team > .team-text > p {
+  color: white;
+  line-height: 1.5;
+  font-size: 15px;
+}
+.content > ul > li > .team > .team-list {
+  width: 944px;
+  height: 448px;
+  position: absolute;
+  top: 250px;
+  left: 50%;
+  transform: translate(-50%, 0) translateZ(0) rotateY(0deg) scale(1);
+  -ms-transform: translate(-50%, 0) translateZ(0) rotateY(0deg) scale(1);
+  -moz-transform: translate(-50%, 0) translateZ(0) rotateY(0deg) scale(1);
+  -webkit-transform: translate(-50%, 0) translateZ(0) rotateY(0deg) scale(1);
+  -o-transform: translate(-50%, 0) translateZ(0) rotateY(0deg) scale(1);
+}
+.content > ul > li > .team > .team-list > ul {
+  height: 448px;
+}
+.content > ul > li > .team > .team-list > ul > li {
+  width: 118px;
+  height: 448px;
+  float: left;
+}
+.content > ul > li > .team > .team-list > ul > li:nth-of-type(1) {
+  background: url(../images/team.png) no-repeat;
+}
+.content > ul > li > .team > .team-list > ul > li:nth-of-type(2) {
+  background: url(../images/team.png) no-repeat;
+  background-position: -118px;
+}
+.content > ul > li > .team > .team-list > ul > li:nth-of-type(3) {
+  background: url(../images/team.png) no-repeat;
+  background-position: -236px;
+}
+.content > ul > li > .team > .team-list > ul > li:nth-of-type(4) {
+  background: url(../images/team.png) no-repeat;
+  background-position: -354px;
+}
+.content > ul > li > .team > .team-list > ul > li:nth-of-type(5) {
+  background: url(../images/team.png) no-repeat;
+  background-position: -472px;
+}
+.content > ul > li > .team > .team-list > ul > li:nth-of-type(6) {
+  background: url(../images/team.png) no-repeat;
+  background-position: -590px;
+}
+.content > ul > li > .team > .team-list > ul > li:nth-of-type(7) {
+  background: url(../images/team.png) no-repeat;
+  background-position: -708px;
+}
+.content > ul > li > .team > .team-list > ul > li:nth-of-type(8) {
+  background: url(../images/team.png) no-repeat;
+  background-position: -826px;
 }
 .slider-left-hide {
   animation: slider-left-hide 2s;

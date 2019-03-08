@@ -36,19 +36,35 @@ function setMainEvent(){
 	var aboutUL = about.querySelectorAll('ul');
 	var picFrame = about.querySelector('.pic-one');
 
+	var sideNavList = document.querySelectorAll('.content > .side-nav-dot li');
+	var teamList = document.querySelectorAll('.team-list > ul >li');
+
+	function addSideNavAndTopNavClickHandle(){
+		for (var i = 0; i < sideNavList.length; i++) {
+			sideNavList[i].classList.remove('side-nav-current');
+			upper[i].style.width = '';
+		}
+		num = this.index;
+		sideNavList[this.index].classList.add('side-nav-current');
+		upper[this.index].style.width = '100%';
+		indicator.style.left = navList[this.index].offsetLeft + navList[this.index].offsetWidth/2 + 'px';
+		lastPosition = navList[this.index].offsetLeft + navList[this.index].offsetWidth/2;
+		contentUl.style.top = -this.index*(document.documentElement.clientHeight - header.offsetHeight) + 'px';
+	}
+
+	
+	//set side nav ---------------------------------------------------------
+	function setSideNavEvent(){
+		for (var i = 0; i < sideNavList.length; i++) {
+			sideNavList[i].index = i;
+			sideNavList[i].addEventListener('click',addSideNavAndTopNavClickHandle);
+		}	
+	}
+	setSideNavEvent()
+
 	//set header nav event------------------------------------------------------------
 	function setHeaderNavEvent(){
-		function addClickHandle(){
-			for (var i = 0; i < upper.length; i++) {
-				upper[i].style.width = '';
-			}
-			num = this.index;
-			upper[this.index].style.width = '100%';
-			indicator.style.left = navList[this.index].offsetLeft + navList[this.index].offsetWidth/2 + 'px';
-			lastPosition = navList[this.index].offsetLeft + navList[this.index].offsetWidth/2;
-			contentUl.style.top = -this.index*(document.documentElement.clientHeight - header.offsetHeight) + 'px';
-		}
-
+		
 		function addMouseoverHandle(){
 			indicator.style.left = navList[this.index].offsetLeft + navList[this.index].offsetWidth/2 + 'px';
 		}
@@ -59,7 +75,7 @@ function setMainEvent(){
 		for (var i = 0; i < navList.length; i++) {
 
 			navList[i].index = i;
-			navList[i].addEventListener('click',addClickHandle);
+			navList[i].addEventListener('click',addSideNavAndTopNavClickHandle);
 			navList[i].addEventListener('mouseover',addMouseoverHandle);
 			navList[i].addEventListener('mouseout',addMouseoutHandle);
 		}
@@ -98,8 +114,10 @@ function setMainEvent(){
 					num--;
 					for (var i = 0; i < upper.length; i++) {
 						upper[i].style.width = '';
+						sideNavList[i].classList.remove('side-nav-current');
 					}
 					upper[num].style.width = '100%';
+					sideNavList[num].classList.add('side-nav-current');
 					contentUl.style.top = -num*(document.documentElement.clientHeight - header.offsetHeight) + 'px';
 					indicator.style.left = navList[num].offsetLeft + navList[num].offsetWidth/2 + 'px';
 					lastPosition = navList[num].offsetLeft + navList[num].offsetWidth/2;
@@ -109,8 +127,10 @@ function setMainEvent(){
 					num++;
 					for (var i = 0; i < upper.length; i++) {
 						upper[i].style.width = '';
+						sideNavList[i].classList.remove('side-nav-current');
 					}
 					upper[num].style.width = '100%';
+					sideNavList[num].classList.add('side-nav-current');
 					contentUl.style.top = -num*(document.documentElement.clientHeight - header.offsetHeight) + 'px';
 					indicator.style.left = navList[num].offsetLeft + navList[num].offsetWidth/2 + 'px';
 					lastPosition = navList[num].offsetLeft + navList[num].offsetWidth/2;
@@ -271,5 +291,23 @@ function setMainEvent(){
 		}
 	}
 	setAboutPicEvent();
+	//set team section event------------------------------------------------------
+	function setTeamSectionEvent(){
+		for (var i = 0; i < teamList.length; i++) {
+			teamList[i].onmouseenter = function(){
+				for (var j = 0; j < teamList.length; j++) {
+					teamList[j].style.opacity = 0.5;
+				}
+				this.style.opacity = 1;
+			}
+
+			teamList[i].onmouseleave = function(){
+				for (var j = 0; j < teamList.length; j++) {
+					teamList[j].style.opacity = '';
+				}
+			}
+		}
+	}
+	setTeamSectionEvent();
 	
 }

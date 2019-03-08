@@ -72,6 +72,23 @@
 	width: 100%;
 	position: relative;
 	overflow: hidden;
+	> .side-nav-dot {
+		position: fixed;
+		right: 10px;
+		top: 50%;
+		li {
+			width: 9px;
+			height: 9px;
+			border: 3px solid #e9f1f6;
+			border-radius: 50%;
+			margin-top: 6px;
+			cursor: pointer;
+			&.side-nav-current {
+				background-color: #f0f0f4;
+				cursor: default;
+			}
+		}
+	}
 	> ul {
 		position: absolute;
 		top: 0;
@@ -449,6 +466,73 @@
 						}
 						&:hover .pic-two-bottom {
 							.transform();
+						}
+					}
+				}
+			}
+			> .team {
+				> .team-title {
+					margin: 50px;
+					width: 400px;
+					float: left;
+					> span {
+						.titleFont();
+					}
+				}
+				> .team-text {
+					margin: 50px;
+					width: 400px;
+					float: right;
+					> p {
+						color:white;
+						line-height:1.5;
+						font-size:15px;
+					}
+				}
+				> .team-list {
+					width: 944px;
+					height: 448px;
+					position: absolute;
+					top: 250px;
+					left: 50%;
+					.transform(@transX:-50%);
+					> ul {
+						height: 448px;
+						> li {
+							width: 118px;
+							height: 448px;
+							float: left;
+							&:nth-of-type(1) {
+								background: url(../images/team.png) no-repeat;
+							}
+							&:nth-of-type(2) {
+								background: url(../images/team.png) no-repeat;
+								background-position: -118px;
+							}
+							&:nth-of-type(3) {
+								background: url(../images/team.png) no-repeat;
+								background-position: -236px;
+							}
+							&:nth-of-type(4) {
+								background: url(../images/team.png) no-repeat;
+								background-position: -354px;
+							}
+							&:nth-of-type(5) {
+								background: url(../images/team.png) no-repeat;
+								background-position: -472px;
+							}
+							&:nth-of-type(6) {
+								background: url(../images/team.png) no-repeat;
+								background-position: -590px;
+							}
+							&:nth-of-type(7) {
+								background: url(../images/team.png) no-repeat;
+								background-position: -708px;
+							}
+							&:nth-of-type(8) {
+								background: url(../images/team.png) no-repeat;
+								background-position: -826px;
+							}
 						}
 					}
 				}
