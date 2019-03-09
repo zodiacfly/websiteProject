@@ -34,30 +34,152 @@ function setMainEvent(){
 
 	var about = document.querySelector('.about');
 	var aboutUL = about.querySelectorAll('ul');
-	var picFrame = about.querySelector('.pic-one');
+	var picFrame1 = about.querySelector('.pic-one');
+	var picFrame2 = about.querySelector('.pic-two');
 
 	var sideNavList = document.querySelectorAll('.content > .side-nav-dot li');
 	var teamList = document.querySelectorAll('.team-list > ul >li');
+	var teamTitle = document.querySelector('.team-title');
+	var teamText = document.querySelector('.team-text');
+	var lastAminationIndex = 0;
+	var aminationArr = [
+			{
+				start:function(){
+					homeSliderUL.style.transform = 'translateY(0)';
+					homeButtonUL.style.transform = 'translateY(0)';
+					homeSliderUL.style.opacity = 1;
+				},
+				end:function(){
+					homeSliderUL.style.transform = 'translateY(-800px)';
+					homeButtonUL.style.transform = 'translateY(300px)';
+					homeSliderUL.style.opacity = 0;
+				}
+			},
+			{
+				start:function(){
+					var plane1 = document.querySelector('.course-plane1');
+					var plane2 = document.querySelector('.course-plane2');
+					var plane3 = document.querySelector('.course-plane3');
+					plane1.style.top = '';
+					plane1.style.left = '';
+					plane2.style.top = '';
+					plane2.style.left = '';
+					plane3.style.top = '';
+					plane3.style.left = '';
+				},
+				end:function(){
+					var plane1 = document.querySelector('.course-plane1');
+					var plane2 = document.querySelector('.course-plane2');
+					var plane3 = document.querySelector('.course-plane3');
+					plane1.style.top = -300 + 'px';
+					plane1.style.left = 200 + 'px';
+					plane2.style.top = 300 + 'px';
+					plane2.style.left = -250 + 'px';
+					plane3.style.top = 300 + 'px';
+					plane3.style.left = 500 + 'px';
 
-	function addSideNavAndTopNavClickHandle(){
+				}
+			},
+			{
+				start:function(){
+					var pencil1 = document.querySelector('.works-pencil1');
+					var pencil2 = document.querySelector('.works-pencil2');
+					var pencil3 = document.querySelector('.works-pencil3');
+					pencil1.style.top = '';
+					pencil2.style.top = '';
+					pencil3.style.top = '';
+				},
+				end:function(){
+					var pencil1 = document.querySelector('.works-pencil1');
+					var pencil2 = document.querySelector('.works-pencil2');
+					var pencil3 = document.querySelector('.works-pencil3');
+					pencil1.style.top = -100 + 'px';
+					pencil2.style.top = 350 + 'px';
+					pencil3.style.top = 400 + 'px';
+				}
+			},
+			{
+				start:function(){
+					picFrame1.style.transform = '';
+					picFrame2.style.transform = '';
+				},
+				end:function(){
+					picFrame1.style.transform = 'rotate(45deg)';
+					picFrame2.style.transform = 'rotate(-45deg)';
+				}
+			},
+			{
+				start:function(){
+					teamText.style.transform = '';
+					teamTitle.style.transform = '';
+				},
+				end:function(){
+					teamText.style.transform = 'translateX(200px)';
+					teamTitle.style.transform = 'translateX(-200px)';
+				}
+			}
+		];
+
+	var music = document.querySelector('.header-music');
+	var audioObj = document.querySelector('.header-music > audio');
+		
+	function addSideNavAndTopNavClickHandle(num){
 		for (var i = 0; i < sideNavList.length; i++) {
 			sideNavList[i].classList.remove('side-nav-current');
 			upper[i].style.width = '';
 		}
-		num = this.index;
-		sideNavList[this.index].classList.add('side-nav-current');
-		upper[this.index].style.width = '100%';
-		indicator.style.left = navList[this.index].offsetLeft + navList[this.index].offsetWidth/2 + 'px';
-		lastPosition = navList[this.index].offsetLeft + navList[this.index].offsetWidth/2;
-		contentUl.style.top = -this.index*(document.documentElement.clientHeight - header.offsetHeight) + 'px';
+		
+		sideNavList[num].classList.add('side-nav-current');
+		upper[num].style.width = '100%';
+		indicator.style.left = navList[num].offsetLeft + navList[num].offsetWidth/2 + 'px';
+		lastPosition = navList[num].offsetLeft + navList[num].offsetWidth/2;
+		contentUl.style.top = -num*(document.documentElement.clientHeight - header.offsetHeight) + 'px';
+
+		if(aminationArr[num] && typeof aminationArr[num].start == 'function' ){
+			aminationArr[num].start();
+		}
+		if(aminationArr[lastAminationIndex] && typeof aminationArr[lastAminationIndex].end == 'function' && lastAminationIndex != num ){
+			aminationArr[lastAminationIndex].end();
+		}
 	}
 
+	//background music--------------------------------------------------------
+	function setMusicPlayEvent(){
+		
+		music.addEventListener('click',addMusicClickHandle)
+
+		function addMusicClickHandle(){
+			if(audioObj.paused){
+				audioObj.play();
+				music.style.background = 'url(images/musicon.gif) no-repeat';
+			} else {
+				audioObj.pause();
+				music.style.background = 'url(images/musicoff.gif) no-repeat';
+			}
+		}
+	}
+	setMusicPlayEvent();
+
+	//set initial amination position for each section------------------------
+	function setInitAminationPosition(){
+		for (var i = 0; i < aminationArr.length; i++) {
+			aminationArr[i].end();
+		}
+		setTimeout(function(){
+			aminationArr[0].start();
+		},1000)
+	}
+	setInitAminationPosition();
 	
 	//set side nav ---------------------------------------------------------
 	function setSideNavEvent(){
 		for (var i = 0; i < sideNavList.length; i++) {
 			sideNavList[i].index = i;
-			sideNavList[i].addEventListener('click',addSideNavAndTopNavClickHandle);
+			sideNavList[i].onclick = function(){
+				lastAminationIndex = num;
+				num = this.index;
+				addSideNavAndTopNavClickHandle(num);
+			}
 		}	
 	}
 	setSideNavEvent()
@@ -72,10 +194,14 @@ function setMainEvent(){
 		function addMouseoutHandle(){
 			indicator.style.left = lastPosition + 'px';
 		}
-		for (var i = 0; i < navList.length; i++) {
 
+		for (var i = 0; i < navList.length; i++) {
 			navList[i].index = i;
-			navList[i].addEventListener('click',addSideNavAndTopNavClickHandle);
+			navList[i].onclick = function(){
+				lastAminationIndex = num;
+				num = this.index;
+				addSideNavAndTopNavClickHandle(num);
+			};
 			navList[i].addEventListener('mouseover',addMouseoverHandle);
 			navList[i].addEventListener('mouseout',addMouseoutHandle);
 		}
@@ -111,29 +237,15 @@ function setMainEvent(){
 			}
 			if(direct == 'up'){
 				if(num > 0){
+					lastAminationIndex = num;
 					num--;
-					for (var i = 0; i < upper.length; i++) {
-						upper[i].style.width = '';
-						sideNavList[i].classList.remove('side-nav-current');
-					}
-					upper[num].style.width = '100%';
-					sideNavList[num].classList.add('side-nav-current');
-					contentUl.style.top = -num*(document.documentElement.clientHeight - header.offsetHeight) + 'px';
-					indicator.style.left = navList[num].offsetLeft + navList[num].offsetWidth/2 + 'px';
-					lastPosition = navList[num].offsetLeft + navList[num].offsetWidth/2;
+					addSideNavAndTopNavClickHandle(num);
 				}
 			} else if(direct == 'down'){
 				if(num < contentList.length - 1){
+					lastAminationIndex = num;
 					num++;
-					for (var i = 0; i < upper.length; i++) {
-						upper[i].style.width = '';
-						sideNavList[i].classList.remove('side-nav-current');
-					}
-					upper[num].style.width = '100%';
-					sideNavList[num].classList.add('side-nav-current');
-					contentUl.style.top = -num*(document.documentElement.clientHeight - header.offsetHeight) + 'px';
-					indicator.style.left = navList[num].offsetLeft + navList[num].offsetWidth/2 + 'px';
-					lastPosition = navList[num].offsetLeft + navList[num].offsetWidth/2;
+					addSideNavAndTopNavClickHandle(num);
 				}
 			}
 		}
@@ -251,8 +363,8 @@ function setMainEvent(){
 	//set pic amination for about section-------------------------------------------
 	function setAboutPicEvent(){
 
-		var listWidth = picFrame.clientWidth/2;
-		var listHeight = picFrame.clientHeight/2;
+		var listWidth = picFrame1.clientWidth/2;
+		var listHeight = picFrame1.clientHeight/2;
 
 		for (var i = 0; i < aboutUL.length; i++) {
 

@@ -15,6 +15,15 @@
 #header > .main-header > .main-header-logo {
   float: left;
   margin-top: 30px;
+  position: relative;
+}
+#header > .main-header > .main-header-logo > .header-music {
+  width: 14px;
+  height: 14px;
+  position: absolute;
+  background: url(../images/musicoff.gif) no-repeat;
+  bottom: -5px;
+  right: -20px;
 }
 #header > .main-header > nav {
   float: right;
@@ -77,6 +86,7 @@
   transition: top 0.8s;
 }
 .content > ul > li {
+  overflow: hidden;
   position: relative;
   background-position: center !important;
 }
@@ -111,6 +121,7 @@
   height: 100%;
   transform-style: preserve-3d;
   perspective: 1000px;
+  transition: all 1s;
 }
 .content > ul > li > .home > .home-slider > li {
   position: absolute;
@@ -164,6 +175,7 @@
   right: 0;
   bottom: 0;
   text-align: center;
+  transition: all 1s;
 }
 .content > ul > li > .home > .home-button > li {
   display: inline-block;
@@ -179,6 +191,8 @@
   background-color: #fff;
 }
 .content > ul > li > .course > .course-title {
+  position: relative;
+  z-index: 2;
   margin: 50px;
 }
 .content > ul > li > .course > .course-title > span {
@@ -189,6 +203,8 @@
   letter-spacing: -5px;
 }
 .content > ul > li > .course > .course-text {
+  position: relative;
+  z-index: 2;
   width: 400px;
   margin-left: 50px;
 }
@@ -200,6 +216,7 @@
 .content > ul > li > .course > .course-list {
   width: 480px;
   position: absolute;
+  z-index: 2;
   top: 50px;
   right: 70px;
 }
@@ -306,7 +323,36 @@
 .content > ul > li > .course > .course-list li > div.back {
   transition: transform 1s;
 }
+.content > ul > li > .course > .course-plane1 {
+  width: 359px;
+  height: 283px;
+  background: url(../images/plane1.png) no-repeat;
+  position: absolute;
+  left: 300px;
+  top: -100px;
+  transition: 1s;
+}
+.content > ul > li > .course > .course-plane2 {
+  width: 309px;
+  height: 249px;
+  background: url(../images/plane2.png) no-repeat;
+  position: absolute;
+  left: -100px;
+  top: 200px;
+  transition: 1s;
+}
+.content > ul > li > .course > .course-plane3 {
+  width: 230px;
+  height: 182px;
+  background: url(../images/plane3.png) no-repeat;
+  position: absolute;
+  left: 300px;
+  top: 400px;
+  transition: 1s;
+}
 .content > ul > li > .works > header {
+  position: relative;
+  z-index: 2;
   margin: 50px 0 100px 50px;
 }
 .content > ul > li > .works > header > span {
@@ -320,12 +366,15 @@
   width: 167px;
   height: 191px;
   position: absolute;
+  z-index: 2;
   top: 170px;
   left: 900px;
   background: url(../images/robot.png) no-repeat;
   animation: robot 4s linear infinite;
 }
 .content > ul > li > .works > .works-list {
+  position: relative;
+  z-index: 2;
   margin-left: 50px;
 }
 .content > ul > li > .works > .works-list li {
@@ -382,6 +431,33 @@
   width: 332px;
   height: 133px;
 }
+.content > ul > li > .works > .works-pencil1 {
+  width: 180px;
+  height: 97px;
+  background: url(../images/pencel1.png) no-repeat;
+  position: absolute;
+  transition: 1s;
+  left: 500px;
+  top: 0;
+}
+.content > ul > li > .works > .works-pencil2 {
+  width: 268px;
+  height: 38px;
+  background: url(../images/pencel2.png) no-repeat;
+  position: absolute;
+  transition: 1s;
+  left: 300px;
+  top: 250px;
+}
+.content > ul > li > .works > .works-pencil3 {
+  width: 441px;
+  height: 231px;
+  background: url(../images/pencel3.png) no-repeat;
+  position: absolute;
+  transition: 1s;
+  left: 650px;
+  top: 300px;
+}
 .content > ul > li > .about > .about-title {
   margin: 50px 0 100px 50px;
 }
@@ -408,6 +484,7 @@
   border: 5px solid rgba(255, 255, 255, 0.5);
   border-radius: 8px;
   overflow: hidden;
+  transition: transform 1s;
 }
 .content > ul > li > .about > .about-pic > div.pic-one {
   top: 50px;
@@ -489,6 +566,7 @@
   margin: 50px;
   width: 400px;
   float: left;
+  transition: transform 1s;
 }
 .content > ul > li > .team > .team-title > span {
   color: #009ee0;
@@ -501,6 +579,7 @@
   margin: 50px;
   width: 400px;
   float: right;
+  transition: transform 1s;
 }
 .content > ul > li > .team > .team-text > p {
   color: white;

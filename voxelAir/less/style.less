@@ -34,6 +34,15 @@
 		> .main-header-logo {
 			float: left;
 			margin-top: 30px;
+			position: relative;
+			> .header-music {
+				width: 14px;
+				height: 14px;
+				position: absolute;
+				background: url(../images/musicoff.gif) no-repeat;
+				bottom: -5px;
+				right: -20px;
+			}
 		}
 		> nav {
 			float: right;
@@ -96,6 +105,7 @@
 		width: 100%;
 		transition: top 0.8s;
 		> li {
+			overflow: hidden;
 			position: relative;
 			background-position: center !important;
 			&:nth-of-type(1) {
@@ -130,6 +140,7 @@
 					height: 100%;
 					transform-style: preserve-3d;
 					perspective: 1000px;
+					transition: all 1s;
 					> li {
 						position: absolute;
 						top: 0;
@@ -183,6 +194,7 @@
 					right: 0;
 					bottom: 0;
 					text-align: center;
+					transition: all 1s;
 					> li {
 						display: inline-block;
 						height: 20px;
@@ -200,12 +212,16 @@
 			}	
 			> .course {
 				> .course-title {
+					position: relative;
+					z-index: 2;
 					margin: 50px;
 					> span {
 						.titleFont();
 					}
 				}
 				> .course-text {
+					position: relative;
+					z-index: 2;
 					width: 400px;
 					margin-left: 50px;
 					> p {
@@ -217,6 +233,7 @@
 				> .course-list {
 					width: 480px;
 					position: absolute;
+					z-index: 2;
 					top: 50px;
 					right: 70px;
 					> span {
@@ -312,9 +329,38 @@
 						}
 					}
 				}
+				> .course-plane1 {
+					width: 359px; 
+					height: 283px; 
+					background: url(../images/plane1.png) no-repeat; 
+					position: absolute; 
+					left: 300px; 
+					top: -100px; 
+					transition: 1s;
+				}
+				> .course-plane2 {
+					width: 309px; 
+					height: 249px; 
+					background: url(../images/plane2.png) no-repeat; 
+					position: absolute; 
+					left: -100px; 
+					top: 200px; 
+					transition: 1s;
+				}
+				> .course-plane3 {
+					width: 230px; 
+					height: 182px; 
+					background: url(../images/plane3.png) no-repeat; 
+					position: absolute; 
+					left:300px; 
+					top: 400px; 
+					transition:1s;
+				}
 			}		
 			> .works {
 				> header {
+					position: relative;
+					z-index: 2;
 					margin: 50px 0 100px 50px;
 					> span {
 						.titleFont();
@@ -324,12 +370,15 @@
 					width: 167px;
 					height: 191px;
 					position: absolute;
+					z-index: 2;
 					top: 170px;
 					left: 900px;
 					background: url(../images/robot.png) no-repeat;
 					animation: robot 4s linear infinite;
 				}
 				> .works-list {
+					position: relative;
+					z-index: 2;
 					margin-left: 50px;
 					li {
 						float: left;
@@ -382,6 +431,33 @@
 						}
 					}
 				}
+				> .works-pencil1 {
+					width: 180px; 
+					height: 97px; 
+					background: url(../images/pencel1.png) no-repeat; 
+					position: absolute; 
+					transition: 1s; 
+					left: 500px; 
+					top: 0;
+				}
+				> .works-pencil2 {
+					width: 268px; 
+					height: 38px; 
+					background: url(../images/pencel2.png) no-repeat; 
+					position: absolute; 
+					transition: 1s; 
+					left: 300px; 
+					top: 250px;
+				}
+				> .works-pencil3 {
+					width: 441px; 
+					height: 231px; 
+					background: url(../images/pencel3.png) no-repeat; 
+					position: absolute; 
+					transition: 1s; 
+					left: 650px; 
+					top: 300px;
+				}
 			}
 			> .about {
 				> .about-title {
@@ -407,6 +483,7 @@
 						border: 5px solid rgba(255,255,255,0.5);
 						border-radius: 8px;
 						overflow: hidden;
+						transition: transform 1s;
 						&.pic-one {							
 							top: 50px;
 							left: 750px;
@@ -475,6 +552,7 @@
 					margin: 50px;
 					width: 400px;
 					float: left;
+					transition: transform 1s;
 					> span {
 						.titleFont();
 					}
@@ -483,6 +561,7 @@
 					margin: 50px;
 					width: 400px;
 					float: right;
+					transition: transform 1s;
 					> p {
 						color:white;
 						line-height:1.5;
