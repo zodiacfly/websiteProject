@@ -637,6 +637,44 @@
   background: url(../images/team.png) no-repeat;
   background-position: -826px;
 }
+/*mask start--------------------------------*/
+#wrap {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+#wrap > .mask {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 20;
+}
+#wrap > .mask > .mask-upper {
+  width: 100%;
+  height: 50%;
+  position: absolute;
+  top: 0;
+  background-color: #177cb0;
+  transition: all 1s;
+}
+#wrap > .mask > .mask-lower {
+  width: 100%;
+  height: 50%;
+  position: absolute;
+  bottom: 0;
+  background-color: #177cb0;
+  transition: all 1s;
+}
+#wrap > .mask > .mask-line {
+  width: 0;
+  height: 4px;
+  background-color: #fff;
+  position: absolute;
+  top: 50%;
+  margin-top: -2px;
+  transition: all 1s;
+}
+/*mask end--------------------------------*/
 .slider-left-hide {
   animation: slider-left-hide 2s;
   visibility: hidden;

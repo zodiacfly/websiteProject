@@ -122,7 +122,12 @@ function setMainEvent(){
 
 	var music = document.querySelector('.header-music');
 	var audioObj = document.querySelector('.header-music > audio');
-		
+
+	var mask = document.querySelector('.mask');
+	var maskUpper = mask.querySelector('.mask-upper');
+	var maskLower = mask.querySelector('.mask-lower');
+	var maskLine = mask.querySelector('.mask-line');
+
 	function addSideNavAndTopNavClickHandle(num){
 		for (var i = 0; i < sideNavList.length; i++) {
 			sideNavList[i].classList.remove('side-nav-current');
@@ -142,6 +147,34 @@ function setMainEvent(){
 			aminationArr[lastAminationIndex].end();
 		}
 	}
+
+	// set amination for opening the website-------------------------------------
+	function setOnLoadAmination(){
+		var loadPicArr = ['bg1.jpg','bg2.jpg','bg3.jpg','bg4.jpg','bg5.jpg','about1.jpg','about2.jpg','about3.jpg','about4.jpg','worksimg1.jpg','worksimg2.jpg','worksimg3.jpg','worksimg4.jpg','team.png'];
+		var flag = 0;
+		for (var i = 0; i < loadPicArr.length; i++) {
+			var img = new Image();
+			img.onload = function(){
+				flag++;
+				maskLine.style.width = flag/loadPicArr.length*100 + '%';
+			}
+			img.src = 'images/' + loadPicArr[i];
+		}
+		maskLine.addEventListener('transitionend',function(){
+			if(flag == loadPicArr.length){
+				this.style.display = 'none';
+				maskUpper.style.height = 0;
+				maskLower.style.height = 0;
+			}
+
+		})
+		maskUpper.addEventListener('transitionend',function(){
+			setHomeSliderEvent();
+			aminationArr[0].start();
+			mask.remove();
+		})
+	}
+	setOnLoadAmination();
 
 	//background music--------------------------------------------------------
 	function setMusicPlayEvent(){
@@ -164,11 +197,8 @@ function setMainEvent(){
 	function setInitAminationPosition(){
 		for (var i = 0; i < aminationArr.length; i++) {
 			aminationArr[i].end();
-		}
-		setTimeout(function(){
-			aminationArr[0].start();
-		},1000)
-	}
+		}	
+	} 
 	setInitAminationPosition();
 	
 	//set side nav ---------------------------------------------------------
@@ -271,6 +301,7 @@ function setMainEvent(){
 		};		
 	}
 	setWheelScrollEvent();
+
 	//set slider event for home section--------------------------------------------
 	function setHomeSliderEvent(){
 		var oldIndex = 0;
@@ -346,20 +377,20 @@ function setMainEvent(){
 
 			oldIndex = autoIndex;
 		}
-		function sliderAutoPlayEvent(){
+		function setSliderAutoPlayEvent(){
 			clearInterval(sliderTimeId);
-			sliderTimeId = setInterval(autoPlay,2000);
+			sliderTimeId = setInterval(autoPlay,2500);
 		}
 
-		sliderAutoPlayEvent();
+		setSliderAutoPlayEvent();
 
-		home.onmouseover = function(){
+		home.onmouseenter = function(){
 			clearInterval(sliderTimeId);
 		}
 
-		home.onmouseout = sliderAutoPlayEvent;
-	}
-	setHomeSliderEvent();
+		home.onmouseleave = setSliderAutoPlayEvent;
+	}//will trigger in setOnLoadAmination()-------------------------------------
+	
 	//set pic amination for about section-------------------------------------------
 	function setAboutPicEvent(){
 
@@ -403,6 +434,7 @@ function setMainEvent(){
 		}
 	}
 	setAboutPicEvent();
+
 	//set team section event------------------------------------------------------
 	function setTeamSectionEvent(){
 		for (var i = 0; i < teamList.length; i++) {
